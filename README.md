@@ -17,7 +17,7 @@ AI-powered interview preparation platform designed to help aspiring software eng
 # 👨‍💻 Contributors
 
 * Rudraksh Mall
-* Rajeev
+* Rajeev Dixit
 
 ---
 

@@ -31,7 +31,7 @@ const interviewSessionSchema = new mongoose.Schema(
       enum: ["DSA", "Resume-Based", "Behavioral", "Mixed"],
       required: true,
     },
-    duration: { type: Number, required: true, min: 5, max: 20 },
+    duration: { type: Number, required: true, min: 5, max: 45 },
     status: { type: String, enum: ["in-progress", "completed"], default: "in-progress" },
     questions: [answerSubSchema],
     conversation: [conversationSubSchema],

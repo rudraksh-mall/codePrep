@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Progress = require("../models/Progress");
 const Problem = require("../models/Problem");
 const User = require("../models/User");
+const { computeStreak } = require("./progress.service");
 
 async function getSummary(userId) {
   const [solved, attempted] = await Promise.all([
@@ -14,9 +15,9 @@ async function getSummary(userId) {
   return {
     totalSolved: solved,
     totalAttempted: attempted,
-    currentStreak: user?.streak?.current || 0,
+    currentStreak: user ? computeStreak(user.streak) : 0,
     longestStreak: user?.streak?.longest || 0,
-    currentDailyStreak: user?.dailyStreak?.current || 0,
+    currentDailyStreak: user ? computeStreak(user.dailyStreak) : 0,
     longestDailyStreak: user?.dailyStreak?.longest || 0,
   };
 }
@@ -244,7 +245,7 @@ async function getConsistency(userId) {
   return {
     longestStreak: user?.streak?.longest || 0,
     longestDailyStreak: user?.dailyStreak?.longest || 0,
-    currentDailyStreak: user?.dailyStreak?.current || 0,
+    currentDailyStreak: user ? computeStreak(user.dailyStreak) : 0,
     bestSolvingDay: bestDay.length > 0 ? bestDay[0] : null,
     bestSolvingWeek: bestWeek.length > 0 ? bestWeek[0] : null,
     averageSolvesPerDay: avgPerDay,

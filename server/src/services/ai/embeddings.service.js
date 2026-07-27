@@ -28,6 +28,7 @@ function getLLM() {
     model: "deepseek/deepseek-chat-v3-0324",
     apiKey: openrouterApiKey,
     temperature: 0.7,
+    maxTokens: 1024,
     configuration: { baseURL: OPENROUTER_BASE_URL },
   });
 }

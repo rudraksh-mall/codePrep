@@ -160,6 +160,21 @@ async function getAnalyticsSummary(userId) {
   return { solvedPerTopic, totalSolved };
 }
 
+function computeStreak(streak) {
+  if (!streak?.lastSolvedDate) return 0;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const last = new Date(streak.lastSolvedDate);
+  last.setHours(0, 0, 0, 0);
+
+  const diffDays = Math.round((today - last) / (1000 * 60 * 60 * 24));
+
+  if (diffDays <= 1) return streak.current;
+  return 0;
+}
+
 module.exports = {
   upsertProgress,
   updateStreak,
@@ -167,4 +182,5 @@ module.exports = {
   getUserProgress,
   getProgressForProblem,
   getAnalyticsSummary,
+  computeStreak,
 };

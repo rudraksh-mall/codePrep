@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const { generateToken } = require('../utils/jwtHelper');
 const ApiError = require('../utils/ApiError');
+const { computeStreak } = require('./progress.service');
 
 async function register({ name, email, password }) {
   const existing = await User.findOne({ email });
@@ -40,7 +41,8 @@ async function getMe(userId) {
     throw new ApiError(404, 'User not found');
   }
 
-  return { id: user._id, name: user.name, email: user.email, avatar: user.avatar, streak: user.streak, preferences: user.preferences };
+  const streak = user.streak ? { ...user.streak.toObject(), current: computeStreak(user.streak) } : undefined;
+  return { id: user._id, name: user.name, email: user.email, avatar: user.avatar, streak, preferences: user.preferences };
 }
 
 module.exports = { register, login, getMe };

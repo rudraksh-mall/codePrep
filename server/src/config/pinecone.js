@@ -25,7 +25,9 @@ async function waitForIndex(client) {
 async function getPineconeIndex() {
   const client = getPineconeClient();
   if (!client) return null;
-  if (!(await client.listIndexes()).indexes?.some((i) => i.name === INDEX_NAME)) {
+  if (
+    !(await client.listIndexes()).indexes?.some((i) => i.name === INDEX_NAME)
+  ) {
     await client.createIndex({
       name: INDEX_NAME,
       dimension: 1536,
@@ -54,4 +56,10 @@ async function deleteAllVectors() {
   }
 }
 
-module.exports = { getPineconeClient, getPineconeIndex, createVectorStore, deleteAllVectors, INDEX_NAME };
+module.exports = {
+  getPineconeClient,
+  getPineconeIndex,
+  createVectorStore,
+  deleteAllVectors,
+  INDEX_NAME,
+};

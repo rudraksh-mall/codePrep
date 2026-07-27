@@ -29,16 +29,16 @@ export default function AppLayout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-surface-50 dark:bg-surface-950">
+    <div className="h-screen flex flex-col overflow-hidden bg-surface-50 dark:bg-surface-950">
       <Navbar onToggleMobileDrawer={toggleMobileDrawer} />
-      <div className="flex">
+      <div className="flex flex-1 min-h-0">
         <Sidebar
           collapsed={sidebarCollapsed}
           onToggleCollapse={toggleCollapse}
           mobileOpen={mobileDrawerOpen}
           onCloseMobile={closeMobileDrawer}
         />
-        <main className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0 overflow-y-auto">
           <PageWrapper>
             <Outlet />
           </PageWrapper>

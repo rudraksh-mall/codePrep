@@ -5,10 +5,11 @@ import Card, { CardHeader, CardBody } from '../ui/Card';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
 import { useToast } from '../ui/Toast';
+import { Zap, Trophy } from 'lucide-react';
 
 const PLATFORMS = [
-  { value: 'leetcode', label: 'LeetCode', icon: '⚡' },
-  { value: 'codeforces', label: 'Codeforces', icon: '🏆' },
+  { value: 'leetcode', label: 'LeetCode', icon: Zap },
+  { value: 'codeforces', label: 'Codeforces', icon: Trophy },
 ];
 
 export default function PlatformConnector() {
@@ -77,7 +78,7 @@ export default function PlatformConnector() {
                 <div key={l.platform}>
                   <div className="flex items-center justify-between rounded-lg bg-surface-50 dark:bg-surface-800 px-3 py-2">
                     <div className="flex items-center gap-2">
-                      <span>{p?.icon}</span>
+                      {p?.icon && <p.icon className="h-4 w-4" />}
                       <span className="text-sm font-medium text-surface-900 dark:text-white">{p?.label}</span>
                       <span className="text-xs text-surface-500">@{l.username}</span>
                       {l.lastSyncedAt && (
@@ -116,7 +117,7 @@ export default function PlatformConnector() {
           >
             {PLATFORMS.map((p) => (
               <option key={p.value} value={p.value} disabled={linkedPlatforms.includes(p.value)}>
-                {p.icon} {p.label}
+                {p.label}
               </option>
             ))}
           </select>

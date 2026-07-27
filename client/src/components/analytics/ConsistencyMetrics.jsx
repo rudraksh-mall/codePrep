@@ -1,10 +1,11 @@
 import Card from '../ui/Card';
+import { Trophy, Target, Flame, BarChart3, TrendingUp, Star } from 'lucide-react';
 
 function StatBox({ label, value, icon }) {
   return (
     <div className="rounded-lg border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-4">
       <div className="flex items-center gap-3">
-        <span className="text-xl shrink-0">{icon}</span>
+        <span className="shrink-0">{icon}</span>
         <div className="min-w-0">
           <p className="text-xs text-surface-500 dark:text-surface-400 truncate">{label}</p>
           <p className="text-lg font-bold text-surface-900 dark:text-surface-100">{value}</p>
@@ -22,19 +23,19 @@ export default function ConsistencyMetrics({ data }) {
   items.push({
     label: 'Longest Streak',
     value: `${data.longestStreak} day${data.longestStreak !== 1 ? 's' : ''}`,
-    icon: '🏆',
+    icon: <Trophy className="h-6 w-6 text-amber-500" />,
   });
 
   if (data.longestDailyStreak > 0) {
     items.push({
       label: 'Longest Daily Streak',
       value: `${data.longestDailyStreak} day${data.longestDailyStreak !== 1 ? 's' : ''}`,
-      icon: '🎯',
+      icon: <Target className="h-6 w-6 text-primary-500" />,
     });
     items.push({
       label: 'Current Daily Streak',
       value: `${data.currentDailyStreak} day${data.currentDailyStreak !== 1 ? 's' : ''}`,
-      icon: '🔥',
+      icon: <Flame className="h-6 w-6 text-amber-500" />,
     });
   }
 
@@ -42,12 +43,12 @@ export default function ConsistencyMetrics({ data }) {
     items.push({
       label: 'Avg Solves / Day',
       value: data.averageSolvesPerDay,
-      icon: '📊',
+      icon: <BarChart3 className="h-6 w-6 text-blue-500" />,
     });
     items.push({
       label: 'Avg Solves / Week',
       value: data.averageSolvesPerWeek,
-      icon: '📈',
+      icon: <TrendingUp className="h-6 w-6 text-green-500" />,
     });
   }
 
@@ -55,7 +56,7 @@ export default function ConsistencyMetrics({ data }) {
     items.push({
       label: 'Best Day',
       value: `${data.bestSolvingDay.count} on ${data.bestSolvingDay.date}`,
-      icon: '⭐',
+      icon: <Star className="h-6 w-6 text-yellow-500" />,
     });
   }
 
@@ -63,7 +64,7 @@ export default function ConsistencyMetrics({ data }) {
     items.push({
       label: 'Best Week',
       value: `${data.bestSolvingWeek.count} (W${data.bestSolvingWeek.week} ${data.bestSolvingWeek.year})`,
-      icon: '🔥',
+      icon: <Flame className="h-6 w-6 text-amber-500" />,
     });
   }
 

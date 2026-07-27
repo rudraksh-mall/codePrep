@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useDailyProblem } from '../../hooks/useDailyProblem';
 import { useProgress } from '../../hooks/useProgress';
+import { Zap } from 'lucide-react';
 
 function getInitials(name) {
   if (!name) return '?';
@@ -57,8 +58,8 @@ export default function Navbar({ onToggleMobileDrawer }) {
             </svg>
           </button>
           <Link to="/dashboard" className="relative flex items-center gap-2 text-lg font-bold text-primary-600 dark:text-primary-400">
-            <span className="text-xl">⚡</span>
-            <span className="truncate">CodePrep AI</span>
+            <Zap className="h-6 w-6" />
+            <span className="truncate">CodePrep</span>
             {showDailyDot && (
               <span className="absolute -top-1 -right-2 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
             )}

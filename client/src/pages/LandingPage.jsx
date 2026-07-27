@@ -75,7 +75,7 @@ export default function LandingPage() {
               C
             </div>
             <span className="text-lg font-bold text-surface-900 dark:text-surface-100">
-              CodePrep AI
+              CodePrep
             </span>
           </div>
           <div className="flex items-center gap-3">

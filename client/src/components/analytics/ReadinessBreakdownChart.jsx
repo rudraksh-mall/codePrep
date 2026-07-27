@@ -1,4 +1,5 @@
 import Card from '../ui/Card';
+import { Brain } from 'lucide-react';
 
 function CategoryCard({ category, solved, total, mastery }) {
   const color = mastery >= 70 ? 'text-green-500' : mastery >= 40 ? 'text-amber-500' : 'text-red-500';
@@ -28,7 +29,7 @@ export default function ReadinessBreakdownChart({ data = [] }) {
     return (
       <Card className="p-6">
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-lg">🧠</span>
+          <Brain className="h-5 w-5 text-primary-500" />
           <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">Interview Readiness</h2>
         </div>
         <div className="flex items-center justify-center py-8 text-sm text-surface-400">
@@ -43,7 +44,7 @@ export default function ReadinessBreakdownChart({ data = [] }) {
   return (
     <Card className="p-6">
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-lg">🧠</span>
+        <Brain className="h-5 w-5 text-primary-500" />
         <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">Interview Readiness</h2>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">

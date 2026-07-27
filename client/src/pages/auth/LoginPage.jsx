@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../components/ui/Toast';
 import * as authApi from '../../api/auth.api';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
@@ -8,9 +9,9 @@ import Input from '../../components/ui/Input';
 export default function LoginPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const showToast = useToast();
 
   const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
@@ -19,15 +20,15 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setError('');
     setLoading(true);
 
     try {
       const data = await authApi.login(form);
       login(data.token);
+      showToast({ type: 'success', title: 'Welcome back!', message: 'You have successfully signed in.' });
       navigate('/dashboard');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      showToast({ type: 'error', title: 'Login failed', message: err.response?.data?.message || 'Invalid credentials. Please try again.' });
     } finally {
       setLoading(false);
     }
@@ -45,7 +46,7 @@ export default function LoginPage() {
                 C
               </div>
               <span className="text-lg font-bold text-surface-900 dark:text-surface-100">
-                CodePrep AI
+                CodePrep
               </span>
             </Link>
             <h1 className="mt-6 text-2xl font-bold text-surface-900 dark:text-surface-100">
@@ -75,16 +76,6 @@ export default function LoginPage() {
               onChange={handleChange}
               required
             />
-
-            {error && (
-              <div className="flex items-center gap-2 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600 dark:bg-red-900/20 dark:text-red-400">
-                <svg className="h-4 w-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4m0 4h.01" strokeLinecap="round" />
-                </svg>
-                {error}
-              </div>
-            )}
 
             <Button type="submit" loading={loading} className="w-full">
               Sign in

@@ -11,6 +11,10 @@ import HeatmapCalendar from '../components/progress/HeatmapCalendar';
 import PlatformConnector from '../components/ai/PlatformConnector';
 import { useSummary, useByTopic, useByDifficulty, useOverTime } from '../hooks/useAnalytics';
 import DailyProblemWidget from '../components/ai/DailyProblemWidget';
+import {
+  Lock, Brain, AlertTriangle, CheckCircle, Flame, Target, Map, Bot, BookOpen,
+  FileText, Rocket, Search, Hand, RefreshCw,
+} from 'lucide-react';
 
 function loadCompletedWeeks(roadmapId, weeks) {
   const completed = {};
@@ -26,7 +30,7 @@ function KpiCard({ label, value, icon, subtitle }) {
   return (
     <Card className="p-5">
       <div className="flex items-center gap-3">
-        <span className="text-2xl shrink-0">{icon}</span>
+        <div className="shrink-0">{icon}</div>
         <div className="min-w-0">
           <p className="text-xs text-surface-500 dark:text-surface-400 truncate">{label}</p>
           <p className="text-xl font-bold text-surface-900 dark:text-surface-100">{value}</p>
@@ -45,7 +49,7 @@ function ReadinessCard({ score, strengths, focusAreas, locked, totalSolved, need
     return (
       <Card className="p-5">
         <div className="flex items-start gap-3">
-          <span className="text-2xl shrink-0">🔒</span>
+          <Lock className="h-7 w-7 shrink-0 text-surface-400" />
           <div className="flex-1 min-w-0">
             <p className="text-xs text-surface-500 dark:text-surface-400">Interview Readiness</p>
             <p className="text-sm text-surface-400 dark:text-surface-500 mt-0.5">
@@ -75,7 +79,7 @@ function ReadinessCard({ score, strengths, focusAreas, locked, totalSolved, need
   return (
     <Card className="p-5">
       <div className="flex items-start gap-3">
-        <span className="text-2xl shrink-0">🧠</span>
+        <Brain className="h-7 w-7 shrink-0 text-primary-500" />
         <div className="flex-1 min-w-0">
           <p className="text-xs text-surface-500 dark:text-surface-400">Interview Readiness</p>
           <p className={`text-xl font-bold ${color}`}>{score}<span className="text-sm font-normal text-surface-400">/100</span></p>
@@ -120,7 +124,7 @@ function TopicFocusRow({ topic, solved, total }) {
     <div className={`rounded-lg border px-3 py-2 ${needsFocus ? 'border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/10' : 'border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800'}`}>
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-1.5 min-w-0">
-          {needsFocus && <span className="text-xs shrink-0">⚠️</span>}
+          {needsFocus && <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-500" />}
           <span className="text-sm font-medium text-surface-700 dark:text-surface-300 truncate">{topic}</span>
         </div>
         <span className="text-2xs text-surface-500 dark:text-surface-400 shrink-0 ml-2">{solved}/{total}</span>
@@ -244,31 +248,31 @@ export default function DashboardPage() {
           <div className="min-w-0 flex-1">
             <h1 className="text-xl font-bold text-surface-900 dark:text-surface-100">
               Welcome back, {userName}
-              <span className="ml-1">👋</span>
+              <Hand className="ml-1 h-6 w-6 inline text-amber-400" />
             </h1>
             <p className="text-sm text-surface-500 dark:text-surface-400 mt-0.5">{motivation}</p>
             <div className="flex flex-wrap items-center gap-3 mt-2">
               {totalSolved > 0 && (
                 <span className="inline-flex items-center gap-1 text-2xs text-surface-400 dark:text-surface-500">
-                  <span>✅</span>
+                  <CheckCircle className="h-3.5 w-3.5 text-green-500" />
                   {totalSolved} solved
                 </span>
               )}
               {currentStreak > 0 && (
                 <span className="inline-flex items-center gap-1 text-2xs text-surface-400 dark:text-surface-500">
-                  <span>🔥</span>
+                  <Flame className="h-3.5 w-3.5 text-amber-500" />
                   {currentStreak} day streak
                 </span>
               )}
               {roadmap?.targetRole && (
                 <span className="inline-flex items-center gap-1 text-2xs text-surface-400 dark:text-surface-500">
-                  <span>🎯</span>
+                  <Target className="h-3.5 w-3.5 text-primary-500" />
                   {roadmap.targetRole}
                 </span>
               )}
               {roadmap && totalWeeks > 0 && (
                 <span className="inline-flex items-center gap-1 text-2xs text-surface-400 dark:text-surface-500">
-                  <span>🗺️</span>
+                  <Map className="h-3.5 w-3.5 text-primary-500" />
                   {roadmapProgressPct}% complete
                 </span>
               )}
@@ -276,7 +280,7 @@ export default function DashboardPage() {
           </div>
           {currentStreak > 0 && (
             <div className="hidden sm:flex items-center gap-2 ml-auto shrink-0 rounded-full bg-amber-100 dark:bg-amber-900/40 px-3 py-1.5">
-              <span className="text-lg">🔥</span>
+              <Flame className="h-5 w-5 text-amber-500" />
               <span className="text-sm font-semibold text-amber-700 dark:text-amber-300">{currentStreak} day streak</span>
             </div>
           )}
@@ -285,10 +289,10 @@ export default function DashboardPage() {
 
       {/* KPI Row */}
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-5">
-        <KpiCard label="Solved" value={totalSolved} icon="✅" />
-        <KpiCard label="Attempted" value={totalAttempted} icon="🔄" />
-        <KpiCard label="Accuracy" value={hasActivity ? `${accuracy}%` : '—'} icon="🎯" subtitle={hasActivity ? `${totalSolved} / ${totalAttempted}` : undefined} />
-        <KpiCard label="Current Streak" value={`${currentStreak}d`} icon="🔥" subtitle={`Longest: ${longestStreak}d`} />
+        <KpiCard label="Solved" value={totalSolved} icon={<CheckCircle className="h-5 w-5 text-green-500" />} />
+        <KpiCard label="Attempted" value={totalAttempted} icon={<RefreshCw className="h-5 w-5 text-blue-500" />} />
+        <KpiCard label="Accuracy" value={hasActivity ? `${accuracy}%` : '—'} icon={<Target className="h-5 w-5 text-primary-500" />} subtitle={hasActivity ? `${totalSolved} / ${totalAttempted}` : undefined} />
+        <KpiCard label="Current Streak" value={`${currentStreak}d`} icon={<Flame className="h-5 w-5 text-amber-500" />} subtitle={`Longest: ${longestStreak}d`} />
         <ReadinessCard
           score={readinessScore}
           strengths={strengths}
@@ -355,7 +359,7 @@ export default function DashboardPage() {
             <Card className="p-6">
               <div className="flex items-start gap-4">
                 <div className="flex items-center justify-center h-10 w-10 rounded-lg bg-primary-100 dark:bg-primary-900/40 shrink-0">
-                  <span className="text-lg">🗺️</span>
+                  <Map className="h-5 w-5" />
                 </div>
                 <div className="min-w-0">
                   <h3 className="text-sm font-semibold text-surface-900 dark:text-surface-100">No roadmap yet</h3>
@@ -371,7 +375,7 @@ export default function DashboardPage() {
           {/* AI Recommendations */}
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-lg">🤖</span>
+              <Bot className="h-5 w-5 text-primary-500" />
               <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">AI Recommendations</h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -428,7 +432,7 @@ export default function DashboardPage() {
           {/* Continue Learning */}
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-lg">📚</span>
+              <BookOpen className="h-5 w-5 text-primary-500" />
               <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">Continue Learning</h2>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
@@ -438,7 +442,7 @@ export default function DashboardPage() {
                   className="flex items-center gap-3 rounded-lg border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-3 hover:bg-surface-50 dark:hover:bg-surface-700 transition"
                 >
                   <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-primary-100 dark:bg-primary-900/40 shrink-0">
-                    <span className="text-sm">📝</span>
+                    <FileText className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-surface-900 dark:text-surface-100 truncate">
@@ -456,7 +460,7 @@ export default function DashboardPage() {
                   className="flex items-center gap-3 rounded-lg border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-3 hover:bg-surface-50 dark:hover:bg-surface-700 transition"
                 >
                   <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-amber-100 dark:bg-amber-900/40 shrink-0">
-                    <span className="text-sm">🗺️</span>
+                    <Map className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-surface-900 dark:text-surface-100 truncate">
@@ -473,7 +477,7 @@ export default function DashboardPage() {
                   className="flex items-center gap-3 rounded-lg border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-3 hover:bg-surface-50 dark:hover:bg-surface-700 transition"
                 >
                   <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-surface-100 dark:bg-surface-800 shrink-0">
-                    <span className="text-sm">🗺️</span>
+                    <Map className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-surface-900 dark:text-surface-100">Create a Roadmap</p>
@@ -487,7 +491,7 @@ export default function DashboardPage() {
                   className="flex items-center gap-3 rounded-lg border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 p-3 hover:bg-surface-50 dark:hover:bg-surface-700 transition"
                 >
                   <div className="flex items-center justify-center h-9 w-9 rounded-lg bg-green-100 dark:bg-green-900/40 shrink-0">
-                    <span className="text-sm">🚀</span>
+                    <Rocket className="h-4 w-4" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-surface-900 dark:text-surface-100">Start with Easy Problems</p>
@@ -504,7 +508,7 @@ export default function DashboardPage() {
           {/* Focus Areas / Topics Not Yet Explored */}
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-lg">{readinessEnabled ? '⚠️' : '🔍'}</span>
+              {readinessEnabled ? <AlertTriangle className="h-5 w-5 text-amber-500" /> : <Search className="h-5 w-5 text-primary-500" />}
               <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">
                 {readinessEnabled ? 'Focus Areas' : 'Topics Not Yet Explored'}
               </h2>

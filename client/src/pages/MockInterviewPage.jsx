@@ -7,6 +7,9 @@ import { Spinner } from '../components/ui/Loader';
 import { useStartInterview, useAnswerInterview, useEndInterview } from '../hooks/useInterview';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
 import { useSpeechToText } from '../hooks/useSpeechToText';
+import {
+  CheckCircle, Bot, User, Mic, VolumeX, Volume2, RefreshCw, Square, Circle, AlertTriangle,
+} from 'lucide-react';
 
 const INTERVIEW_TYPES = [
   { value: 'DSA', label: 'DSA', desc: 'Data structures, algorithms & complexity' },
@@ -152,7 +155,7 @@ function SetupScreen({ onStart }) {
 
             {hasResume && !uploading && (
               <div className="mt-3 flex items-center gap-2 rounded-lg bg-green-50 dark:bg-green-900/20 px-3 py-2">
-                <span className="text-sm">✅</span>
+                <CheckCircle className="h-4 w-4 text-green-500" />
                 <span className="text-sm text-green-700 dark:text-green-300 truncate flex-1">
                   Current resume: {resumeFileName || 'Uploaded'}
                 </span>
@@ -205,7 +208,7 @@ function ChatMessage({ role, message }) {
           ? 'bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300'
           : 'bg-surface-200 dark:bg-surface-700 text-surface-600 dark:text-surface-400'
       }`}>
-        {isAi ? '🤖' : '👤'}
+        {isAi ? <Bot className="h-4 w-4" /> : <User className="h-4 w-4" />}
       </div>
       <div className={`max-w-[80%] ${isAi ? '' : 'text-right'}`}>
         <p className={`text-xs font-medium mb-0.5 ${
@@ -258,7 +261,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
       {/* Header */}
       <div className="flex items-center justify-between mb-4 shrink-0">
         <div className="flex items-center gap-2">
-          <span className="text-lg">🎙️</span>
+          <Mic className="h-5 w-5 text-primary-500" />
           <span className="text-sm font-semibold text-surface-900 dark:text-surface-100">Live Interview</span>
         </div>
         <div className="flex items-center gap-3">
@@ -270,7 +273,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
             }`}
             title={muted ? 'Unmute interviewer' : 'Mute interviewer'}
           >
-            {muted ? '🔇' : '🔊'}
+            {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           </button>
           {conversation.length > 0 && (
             <button
@@ -278,7 +281,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
               className="p-2 rounded-lg text-sm text-surface-500 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition"
               title="Replay last question"
             >
-              🔄
+              <RefreshCw className="h-4 w-4" />
             </button>
           )}
           {isSpeaking && (
@@ -287,7 +290,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
               className="p-2 rounded-lg text-sm text-surface-500 dark:text-surface-400 hover:bg-surface-200 dark:hover:bg-surface-700 transition"
               title="Stop speaking"
             >
-              ⏹️
+              <Square className="h-4 w-4" />
             </button>
           )}
           <p className={`text-sm font-mono font-bold ${timerColor}`}>{formatTime(timerSeconds)}</p>
@@ -311,7 +314,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
         {isListening && (transcript || interimTranscript) && (
           <div className="flex gap-3 flex-row-reverse">
             <div className="flex items-center justify-center h-8 w-8 rounded-full shrink-0 text-sm bg-surface-200 dark:bg-surface-700 text-surface-600 dark:text-surface-400">
-              👤
+              <User className="h-4 w-4" />
             </div>
             <div className="max-w-[80%] text-right">
               <p className="text-xs font-medium mb-0.5 text-surface-500 dark:text-surface-400">
@@ -331,7 +334,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
         {loading && (
           <div className="flex gap-3">
             <div className="flex items-center justify-center h-8 w-8 rounded-full shrink-0 text-sm bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300">
-              🤖
+              <Bot className="h-4 w-4" />
             </div>
             <div className="bg-surface-100 dark:bg-surface-800 rounded-xl px-4 py-3">
               <div className="flex items-center gap-2">
@@ -359,7 +362,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
               disabled={loading}
               className="flex items-center gap-2 rounded-full bg-surface-200 dark:bg-surface-700 px-6 py-3 text-sm font-medium text-surface-700 dark:text-surface-300 hover:bg-surface-300 dark:hover:bg-surface-600 transition disabled:opacity-50"
             >
-              <span className="text-xl">🎤</span>
+              <Mic className="h-5 w-5" />
               Click to Speak
             </button>
           )}
@@ -368,7 +371,7 @@ function InterviewScreen({ conversation, onSendAnswer, loading, timerSeconds, mu
               onClick={handleMicClick}
               className="flex items-center gap-2 rounded-full bg-red-100 dark:bg-red-900/40 px-6 py-3 text-sm font-medium text-red-600 dark:text-red-400 animate-pulse"
             >
-              <span className="text-xl">🔴</span>
+              <Circle className="h-5 w-5 text-red-500" fill="currentColor" />
               Stop Recording
             </button>
           )}

@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDailyProblem } from '../../hooks/useDailyProblem';
 import { useProgress } from '../../hooks/useProgress';
+import { Target } from 'lucide-react';
 
 export default function StreakCard({ dailyCurrent, dailyLongest }) {
   const { data: dailyProblem, isLoading: dailyLoading } = useDailyProblem();
@@ -17,7 +18,7 @@ export default function StreakCard({ dailyCurrent, dailyLongest }) {
   return (
     <div className="rounded-xl border bg-white dark:bg-surface-900 shadow-sm p-6 space-y-4">
       <div className="flex items-center gap-4">
-        <span className="text-3xl">🎯</span>
+        <Target className="h-8 w-8 text-primary-500" />
         <div>
           <p className="text-sm text-surface-500 dark:text-surface-400">Daily Problem Streak</p>
           <p className="text-3xl font-bold text-surface-900 dark:text-surface-100">

@@ -45,7 +45,7 @@ export default function RegisterPage() {
                 C
               </div>
               <span className="text-lg font-bold text-surface-900 dark:text-surface-100">
-                CodePrep AI
+                CodePrep
               </span>
             </Link>
             <h1 className="mt-6 text-2xl font-bold text-surface-900 dark:text-surface-100">

@@ -69,7 +69,7 @@ export default function ProblemDetailPage() {
       queryClient.invalidateQueries({ queryKey: ['progress', problemId] });
       queryClient.invalidateQueries({ queryKey: ['analytics'] });
       if (data?.isDailyComplete) {
-        showToast({ type: 'success', title: 'Daily problem complete! 🔥', message: 'Streak maintained' });
+        showToast({ type: 'success', title: 'Daily problem complete!', message: 'Streak maintained' });
       }
     },
   });

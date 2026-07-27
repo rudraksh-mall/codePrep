@@ -1,4 +1,5 @@
 import Card from '../ui/Card';
+import { Clock } from 'lucide-react';
 
 function formatMinutes(mins) {
   if (mins < 60) return `${mins}m`;
@@ -12,7 +13,7 @@ export default function TimeInvestmentCard({ data }) {
     return (
       <Card className="p-6">
         <div className="flex items-center gap-2 mb-4">
-          <span className="text-lg">⏱️</span>
+          <Clock className="h-5 w-5 text-primary-500" />
           <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">Time Investment</h2>
         </div>
         <div className="flex items-center justify-center py-8 text-sm text-surface-400">
@@ -25,7 +26,7 @@ export default function TimeInvestmentCard({ data }) {
   return (
     <Card className="p-6">
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-lg">⏱️</span>
+        <Clock className="h-5 w-5 text-primary-500" />
         <h2 className="text-sm font-semibold text-surface-900 dark:text-surface-100">Time Investment</h2>
       </div>
 

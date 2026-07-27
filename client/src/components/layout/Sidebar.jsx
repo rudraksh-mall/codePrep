@@ -1,14 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { LayoutDashboard, FileText, Bot, File, Map, Mic, TrendingUp, LogOut, Zap } from 'lucide-react';
 
 const links = [
-  { to: '/dashboard', label: 'Dashboard', icon: '📊' },
-  { to: '/problems', label: 'Problems', icon: '📝' },
-  { to: '/assistant', label: 'Assistant', icon: '🤖' },
-  { to: '/resume', label: 'Resume', icon: '📄' },
-  { to: '/roadmap', label: 'Roadmap', icon: '🗺️' },
-  { to: '/mock-interview', label: 'Mock Interview', icon: '🎙️' },
-  { to: '/analytics', label: 'Analytics', icon: '📈' },
+  { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/problems', label: 'Problems', icon: FileText },
+  { to: '/assistant', label: 'Assistant', icon: Bot },
+  { to: '/resume', label: 'Resume', icon: File },
+  { to: '/roadmap', label: 'Roadmap', icon: Map },
+  { to: '/mock-interview', label: 'Mock Interview', icon: Mic },
+  { to: '/analytics', label: 'Analytics', icon: TrendingUp },
 ];
 
 function getInitials(name) {
@@ -46,7 +47,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
         }`}
         title={compact ? link.label : undefined}
       >
-        <span className="text-lg shrink-0">{link.icon}</span>
+        <link.icon className="h-5 w-5 shrink-0" />
         {!compact && <span className="truncate">{link.label}</span>}
       </Link>
     ));
@@ -55,7 +56,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
     <>
       {/* Desktop sidebar — collapsible */}
       <aside
-        className={`hidden lg:flex flex-col border-r bg-white dark:bg-surface-900 min-h-[calc(100vh-3.5rem)] transition-all duration-200 overflow-hidden ${
+        className={`hidden lg:flex flex-col border-r bg-white dark:bg-surface-900 h-full transition-all duration-200 overflow-hidden ${
           collapsed ? 'w-16' : 'w-56'
         }`}
       >
@@ -92,7 +93,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
             }`}
             title={collapsed ? 'Logout' : undefined}
           >
-            <span className="text-lg shrink-0">🚪</span>
+            <LogOut className="h-5 w-5 shrink-0" />
             {!collapsed && <span>Logout</span>}
           </button>
         </div>
@@ -114,9 +115,9 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
       >
         <div className="flex items-center justify-between px-4 h-14 border-b border-surface-200 dark:border-surface-700 shrink-0">
           <Link to="/dashboard" onClick={onCloseMobile} className="flex items-center gap-3 min-w-0">
-            <span className="text-xl shrink-0">⚡</span>
+            <Zap className="h-5 w-5 shrink-0" />
             <span className="text-sm font-bold text-surface-900 dark:text-surface-100 truncate">
-              CodePrep AI
+              CodePrep
             </span>
           </Link>
           <button
@@ -156,7 +157,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
                   : 'text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800'
               }`}
             >
-              <span className="text-lg shrink-0">{link.icon}</span>
+              <link.icon className="h-5 w-5 shrink-0" />
               <span className="truncate">{link.label}</span>
             </Link>
           ))}
@@ -167,7 +168,7 @@ export default function Sidebar({ collapsed, onToggleCollapse, mobileOpen, onClo
             onClick={() => { logout(); onCloseMobile(); }}
             className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-surface-600 dark:text-surface-400 hover:bg-surface-100 dark:hover:bg-surface-800 transition"
           >
-            <span className="text-lg shrink-0">🚪</span>
+            <LogOut className="h-5 w-5 shrink-0" />
             <span>Logout</span>
           </button>
         </div>

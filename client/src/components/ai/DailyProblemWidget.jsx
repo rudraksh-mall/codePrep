@@ -5,6 +5,7 @@ import { useProgress } from '../../hooks/useProgress';
 import Card from '../ui/Card';
 import Button from '../ui/Button';
 import DifficultyBadge from '../problems/DifficultyBadge';
+import { CheckCircle, Calendar, Lightbulb } from 'lucide-react';
 
 function todayString() {
   const d = new Date();
@@ -85,7 +86,7 @@ function DailyProblemWidgetInner({ today }) {
     return (
       <Card className="p-5 mx-auto max-w-[700px] border-green-200 dark:border-green-800">
         <div className="flex items-start gap-3">
-          <span className="text-xl shrink-0 mt-0.5">✅</span>
+          <CheckCircle className="h-6 w-6 shrink-0 mt-0.5 text-green-500" />
           <div>
             <Link
               to={`/problems/${problemSlug}`}
@@ -107,7 +108,7 @@ function DailyProblemWidgetInner({ today }) {
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-sm">📅</span>
+            <Calendar className="h-4 w-4 text-primary-500" />
             <span className="text-xs text-surface-500 dark:text-surface-400 font-medium uppercase tracking-wider">
               Problem of the day
             </span>
@@ -137,7 +138,7 @@ function DailyProblemWidgetInner({ today }) {
         {reason && (
           <div className="rounded-lg bg-surface-100 dark:bg-surface-800 p-3">
             <div className="flex items-start gap-2">
-              <span className="text-sm shrink-0 mt-0.5">💡</span>
+              <Lightbulb className="h-4 w-4 shrink-0 mt-0.5 text-amber-500" />
               <p className="text-sm text-surface-600 dark:text-surface-400 leading-relaxed">
                 {reason}
               </p>
